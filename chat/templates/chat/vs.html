@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- chat/templates/chat/room.html -->
+<html>
+<head>
+    <meta charset="utf-8"/>  <title>Chat Room</title>
+    <style>
+        .buttonDesign{
+            display: inline-block;
+            text-decoration: none;
+            color: #FFF;
+            width: 520px;
+            height: 520px;
+            line-height: 520px;
+            border-radius: 50%;
+            text-align: center;
+            overflow: hidden;
+            background-image: linear-gradient(45deg, #dd0037 0%, #892eff 100%);
+            transition: .4s;    
+        }
+    </style>
+</head>
+<body>
+    <input id="chat-message-submit" class="buttonDesign" type="button" value="シャッフル"/>
+</body>
+<script>
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/vs/');
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data); var message = data['message'];
+        document.querySelector('#chat-log').value += (message + '\n');
+    };
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        chatSocket.send(JSON.stringify({'message': "Helloworld!"}));
+    };
+</script>
+</html>

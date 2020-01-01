@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- chat/templates/chat/room.html -->
+<html>
+<head>
+    <meta charset="utf-8"/>  <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-log" cols="10" rows="2" style="text-align: center;" onchange="PlaySound()"></textarea><br/>
+    <h1 id="context" style="text-align: center;"></h1>
+</body>
+<script>
+    function PlaySound() {
+      audioElem = new Audio();
+      audioElem.src = "http://kolber.github.io/audiojs/demos/mp3/juicy.mp3";
+      audioElem.play();
+    }
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/vs/');
+    chatSocket.onmessage = function(e) {
+        PlaySound();
+        var data = JSON.parse(e.data); var message = data['message'];
+        // document.querySelector('#chat-log').value += (message + '\n');
+        var item = ['A', 'B', 'C', 'D'];
+        var maxValue = 4;
+        var x1 = getRandomInt(maxValue);
+        var x2 = getRandomInt(maxValue);
+        while(x1==x2){
+            x2 = getRandomInt(maxValue);
+        }
+        document.querySelector('#chat-log').value += ("シャッフル!" + '\n');
+        document.getElementById('context').innerHTML = item[x1] + " -> " + item[x2];
+    };
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+</script>
+</html>
