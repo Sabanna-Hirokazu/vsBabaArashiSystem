@@ -11,7 +11,7 @@
 <script>
     function PlaySound() {
       audioElem = new Audio();
-      audioElem.src = "http://kolber.github.io/audiojs/demos/mp3/juicy.mp3";
+      audioElem.src = "https://raw.githubusercontent.com/Sabanna-Hirokazu/vsBabaArashiSystem/master/chat/templates/chat/alert.mp3";
       audioElem.play();
     }
     function getRandomInt(max) {
@@ -23,15 +23,19 @@
         PlaySound();
         var data = JSON.parse(e.data); var message = data['message'];
         // document.querySelector('#chat-log').value += (message + '\n');
-        var item = ['A', 'B', 'C', 'D'];
-        var maxValue = 4;
-        var x1 = getRandomInt(maxValue);
-        var x2 = getRandomInt(maxValue);
-        while(x1==x2){
-            x2 = getRandomInt(maxValue);
+        var item = ['右１', '左１', '右２', '左２', '対面', 'no'];
+        var maxValue = 6;
+        var x = getRandomInt(maxValue);
+        if(x==maxValue){
+            document.getElementById('context').innerHTML = '';
+            document.write('<img id="image" src="https://raw.githubusercontent.com/Sabanna-Hirokazu/vsBabaArashiSystem/master/chat/templates/chat/dokuro.png" width="" height="" />');
+        }
+        else{
+            document.getElementById('context').innerHTML = item[x];
+            document.getElementById('image').remove();
         }
         document.querySelector('#chat-log').value += ("シャッフル!" + '\n');
-        document.getElementById('context').innerHTML = item[x1] + " -> " + item[x2];
+        
     };
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');

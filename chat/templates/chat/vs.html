@@ -2,13 +2,15 @@
 <!-- chat/templates/chat/room.html -->
 <html>
 <head>
-    <meta charset="utf-8"/>  <title>Chat Room</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>vs Taniguchi</title>
     <style>
         .buttonDesign{
             display: inline-block;
             text-decoration: none;
             color: #FFF;
-            width: 520px;
+            width: 100%;
             height: 520px;
             line-height: 520px;
             border-radius: 50%;
@@ -17,10 +19,30 @@
             background-image: linear-gradient(45deg, #dd0037 0%, #892eff 100%);
             transition: .4s;    
         }
+        .btn-square {
+            display: inline-block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            /* background: #668ad8;ボタン色 */
+            background-image: linear-gradient(45deg, #dd0037 0%, #892eff 100%);
+            color: #FFF;
+            border-bottom: solid 4px #627295;
+            border-radius: 3px;
+            width: 100%;
+            height: 100%;
+            line-height: 1800px;
+        }
+        .btn-square:active {
+            /*ボタンを押したとき*/
+            -webkit-transform: translateY(4px);
+            transform: translateY(4px);/*下に動く*/
+            border-bottom: none;/*線を消す*/
+        }
     </style>
 </head>
 <body>
-    <input id="chat-message-submit" class="buttonDesign" type="button" value="シャッフル"/>
+    <!-- <input id="chat-message-submit" class="btn-square" type="button" value="シャッフル"/> -->
+    <a href="#" id="chat-message-submit" class="btn-square">BUTTON</a>
 </body>
 <script>
     var chatSocket = new WebSocket(
