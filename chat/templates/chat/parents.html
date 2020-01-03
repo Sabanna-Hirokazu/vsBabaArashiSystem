@@ -2,11 +2,14 @@
 <!-- chat/templates/chat/room.html -->
 <html>
 <head>
-    <meta charset="utf-8"/>  <title>Chat Room</title>
+    <meta charset="utf-8"/>  <title>vs Arashi</title>
 </head>
 <body>
     <textarea id="chat-log" cols="10" rows="2" style="text-align: center;" onchange="PlaySound()"></textarea><br/>
-    <h1 id="context" style="text-align: center;"></h1>
+    <h1 id="context" style="text-align: center; font-size: 114px"></h1>
+    <div style="text-align: center;">
+        <img id="image_dokuro" style="display: none;" src="https://raw.githubusercontent.com/Sabanna-Hirokazu/vsBabaArashiSystem/master/chat/templates/chat/dokuro.png" width="" height="" />
+    </div>
 </body>
 <script>
     function PlaySound() {
@@ -26,13 +29,14 @@
         var item = ['右１', '左１', '右２', '左２', '対面', 'no'];
         var maxValue = 6;
         var x = getRandomInt(maxValue);
-        if(x==maxValue){
+        var dokuro = document.getElementById('image_dokuro');
+        if(x==maxValue-1){
             document.getElementById('context').innerHTML = '';
-            document.write('<img id="image" src="https://raw.githubusercontent.com/Sabanna-Hirokazu/vsBabaArashiSystem/master/chat/templates/chat/dokuro.png" width="" height="" />');
+            dokuro.style.display = 'inline';
         }
         else{
             document.getElementById('context').innerHTML = item[x];
-            document.getElementById('image').remove();
+            dokuro.style.display = 'none';
         }
         document.querySelector('#chat-log').value += ("シャッフル!" + '\n');
         
